@@ -1,27 +1,32 @@
 const express = require('express')
 const router = express.Router()
+
+// Importe security filter
+const securityFilter = require('../securityFilter')
+
+// Import user service
 const userService = require('../service/userService')
 
-
-// Objetenção de dados: GET
-router.get('/user', async function(req, res){
+// Get all users: GET
+router.get('/user', securityFilter.filterAcess, async function(req, res){
     const users = await userService.getUsers()
     res.json(users)
 })
 
-router.get('/user/:id', async function(req, res){
+// Get specific user
+router.get('/user/:id', securityFilter.filterAcess, async function(req, res){
     const user = await userService.getUser(req.params.id)
     res.json(user)
 })
 
-// Criação de dados: POST
-router.post('/user', async function(req, res){})
+// Create new user: POST
+router.post('/user', securityFilter.filterAcess, async function(req, res){})
 
-// Ediçao de dados: PUT
-router.put('/user/:id', async function(req, res){})
+// Edit user: PUT
+router.put('/user/:id', securityFilter.filterAcess, async function(req, res){})
 
-// Remoção de dados: DELETE
-router.delete('/user/:id', async function(req, res){})
+// Delete user: DELETE
+router.delete('/user/:id', securityFilter.filterAcess, async function(req, res){})
 
 
 module.exports = router

@@ -2,16 +2,13 @@ const http = require('http');
 const express = require('express');
 const app = express();
 
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', require('./route/userRoute'))
+app.use('/', require('./route/authRoute'))
 
-// const bodyParser = require('body-parser');
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-
-// require("dotenv-safe").config();
-// const jwt = require('jsonwebtoken');
 
 
 // app.get('/', verifyJWT, (req, res, next) => {
@@ -48,18 +45,7 @@ app.use('/', require('./route/userRoute'))
 
 
 
-// function verifyJWT(req, res, next) {
-//     const token = req.headers['x-access-token'];
-//     if (!token) return res.status(401).json({ auth: false, message: 'Token não fornecido' });
 
-//     jwt.verify(token, process.env.SECRET, function (err, decoded) {
-//         if (err) return res.status(500).json({ auth: false, message: 'Falha na autenticação do Token' });
-
-//         // se tudo estiver ok, salva no request para uso posterior
-//         req.userId = decoded.id;
-//         next();
-//     });
-// }
 
     const server = http.createServer(app);
     server.listen(3000);

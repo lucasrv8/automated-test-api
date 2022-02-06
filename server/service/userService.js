@@ -5,6 +5,5 @@ exports.getUsers = function(){
 }
 
 exports.getUser = function(id){
-    console.log(id);
     return userData.getUser(id)
 }
