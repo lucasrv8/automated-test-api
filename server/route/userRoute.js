@@ -16,7 +16,7 @@ router.get('/user', securityFilter.filterAcess, async function(req, res){
 // Get specific user
 router.get('/user/:id', securityFilter.filterAcess, async function(req, res){
     const user = await userService.getUser(req.params.id)
-    res.json(user)
+    res.status(user.statusCode).json(user)
 })
 
 // Create new user: POST

@@ -11,7 +11,7 @@ exports.validateUser = async function(username, password){
         let userId = findUser[0].id
         // Generate access token
         const token = jwt.sign({ userId }, process.env.SECRET, {
-            expiresIn: 10 // expires in 5min
+            expiresIn: 86400 // expires in 1 day
         });
 
         return {statusCode: 200, message: 'Login successfully', token: token }
